@@ -1,7 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
 
 interface DropdownItem {
   title: string;
@@ -61,7 +60,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({
         >
           {title}
         </Link>
-        <ChevronDown className="h-4 w-4 text-gray-500 group-hover:text-blue-600 transition-colors" />
+        {/* Removed the ChevronDown icon */}
       </div>
       
       {/* Dropdown content that appears on hover */}
