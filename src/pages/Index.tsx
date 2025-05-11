@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header/Header';
 
 const Index = () => {
@@ -13,12 +14,12 @@ const Index = () => {
             Delivering innovation and digital transformation to businesses worldwide through modern technology solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <button className="px-8 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+            <Link to="/services" className="px-8 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-center">
               Our Services
-            </button>
-            <button className="px-8 py-3 bg-white border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50 transition-colors">
+            </Link>
+            <Link to="/contact" className="px-8 py-3 bg-white border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50 transition-colors text-center">
               Contact Us
-            </button>
+            </Link>
           </div>
         </div>
       </main>
