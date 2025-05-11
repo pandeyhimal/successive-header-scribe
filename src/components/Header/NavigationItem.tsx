@@ -2,11 +2,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { 
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 interface DropdownItem {
   title: string;
@@ -26,13 +21,13 @@ const NavigationItem: React.FC<NavigationItemProps> = ({
   hasDropdown, 
   dropdownItems = [] 
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsHovering(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -53,7 +48,12 @@ const NavigationItem: React.FC<NavigationItemProps> = ({
   }
 
   return (
-    <div className="relative group" ref={dropdownRef}>
+    <div 
+      className="relative group" 
+      ref={menuRef}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       <div className="flex items-center">
         <Link
           to={href}
@@ -65,7 +65,12 @@ const NavigationItem: React.FC<NavigationItemProps> = ({
       </div>
       
       {/* Dropdown content that appears on hover */}
-      <div className="absolute left-0 mt-2 w-64 bg-white invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 transform origin-top-left scale-95 group-hover:scale-100 shadow-lg rounded-md border border-gray-100 z-50">
+      <div 
+        className={`absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg border border-gray-100 z-50 transition-all duration-200 ${
+          isHovering ? 'opacity-100 visible transform scale-100' : 'opacity-0 invisible transform scale-95'
+        }`}
+        style={{ transformOrigin: 'top left' }}
+      >
         <div className="py-2 grid grid-cols-1 gap-1">
           {dropdownItems.map((item, index) => (
             <Link

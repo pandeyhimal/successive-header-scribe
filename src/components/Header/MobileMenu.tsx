@@ -1,8 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface DropdownItem {
   title: string;
@@ -23,20 +22,38 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, navItems }) => {
+  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>({});
+
   if (!isOpen) return null;
+
+  const toggleItem = (index: number) => {
+    setExpandedItems(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   return (
     <div className="md:hidden bg-white shadow-lg border-t">
       <div className="p-4 space-y-2">
-        <Accordion type="single" collapsible className="w-full">
-          {navItems.map((item, idx) => (
-            item.hasDropdown ? (
-              <AccordionItem key={idx} value={`item-${idx}`}>
-                <AccordionTrigger className="py-3 text-sm font-medium text-gray-700 hover:text-blue-600">
+        {navItems.map((item, idx) => (
+          <div key={idx} className="border-b border-gray-100 last:border-b-0">
+            {item.hasDropdown ? (
+              <div>
+                <button 
+                  onClick={() => toggleItem(idx)} 
+                  className="w-full py-3 flex items-center justify-between text-sm font-medium text-gray-700 hover:text-blue-600"
+                >
                   {item.title}
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="py-2 pl-4 space-y-2">
+                  {expandedItems[idx] ? (
+                    <ChevronUp className="h-4 w-4" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4" />
+                  )}
+                </button>
+                
+                {expandedItems[idx] && (
+                  <div className="py-2 pl-4 space-y-2 animate-accordion-down">
                     {item.dropdownItems?.map((dropdownItem, subIdx) => (
                       <Link
                         key={subIdx}
@@ -48,10 +65,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, navItems }) 
                       </Link>
                     ))}
                   </div>
-                </AccordionContent>
-              </AccordionItem>
+                )}
+              </div>
             ) : (
-              <div key={idx} className="py-3">
+              <div className="py-3">
                 <Link
                   to={item.href || "#"}
                   className="text-sm font-medium text-gray-700 hover:text-blue-600"
@@ -60,17 +77,17 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, navItems }) 
                   {item.title}
                 </Link>
               </div>
-            )
-          ))}
-        </Accordion>
+            )}
+          </div>
+        ))}
         
         <div className="pt-4 border-t border-gray-200">
           <Link
-            to="#"
+            to="/contact"
             className="w-full flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
             onClick={() => setIsOpen(false)}
           >
-            Get in Touch
+            Contact Us
           </Link>
         </div>
       </div>
