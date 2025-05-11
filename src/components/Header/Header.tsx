@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Menu, ChevronDown } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import MobileMenu from './MobileMenu';
 import NavigationItem from './NavigationItem';
@@ -10,38 +10,62 @@ const Header = () => {
 
   const navItems = [
     {
-      title: "Services",
+      title: "About Us",
+      href: "/about",
       hasDropdown: true,
       dropdownItems: [
-        { title: "Digital Transformation", href: "#" },
-        { title: "Product Engineering", href: "#" },
-        { title: "Cloud Services", href: "#" },
-        { title: "Data & AI", href: "#" },
+        { title: "Our Story", href: "/about/story" },
+        { title: "Culture", href: "/about/culture" },
+        { title: "Careers", href: "/about/careers" },
+        { title: "How We Work", href: "/about/how-we-work" },
+        { title: "Awards & Recognitions", href: "/about/awards" },
+      ]
+    },
+    {
+      title: "Services",
+      href: "/services",
+      hasDropdown: true,
+      dropdownItems: [
+        { title: "Product Engineering", href: "/services/product-engineering" },
+        { title: "Cloud", href: "/services/cloud" },
+        { title: "Data & AI", href: "/services/data-ai" },
+        { title: "Digital Strategy", href: "/services/digital-strategy" },
+        { title: "Customer Experience", href: "/services/customer-experience" },
+      ]
+    },
+    {
+      title: "Accelerators",
+      href: "/accelerators",
+      hasDropdown: true,
+      dropdownItems: [
+        { title: "Kubernetes Well Architected Review", href: "/accelerators/kubernetes" },
+        { title: "AWS Well-Architected Review", href: "/accelerators/aws" },
+        { title: "Generative AI Proof of Concept", href: "/accelerators/generative-ai" },
+        { title: "GenAI Shopping Assistant", href: "/accelerators/genai-shopping" },
+        { title: "Product Engineering ISV", href: "/accelerators/product-isv" },
       ]
     },
     {
       title: "Industries",
+      href: "/industries",
       hasDropdown: true,
       dropdownItems: [
-        { title: "Banking & Financial", href: "#" },
-        { title: "Healthcare", href: "#" },
-        { title: "Retail", href: "#" },
-        { title: "Education", href: "#" },
+        { title: "Healthcare & Life Sciences", href: "/industries/healthcare" },
+        { title: "Banking & Financial", href: "/industries/banking" },
+        { title: "Retail & Commerce", href: "/industries/retail" },
+        { title: "Media & Entertainment", href: "/industries/media" },
+        { title: "Travel & Hospitality", href: "/industries/travel" },
+        { title: "Transportation & Logistics", href: "/industries/transportation" },
       ]
     },
     {
-      title: "Insights",
-      href: "#",
-      hasDropdown: false
-    },
-    {
-      title: "About Us",
+      title: "Resource",
+      href: "/resource",
       hasDropdown: true,
       dropdownItems: [
-        { title: "Our Story", href: "#" },
-        { title: "Leadership", href: "#" },
-        { title: "Careers", href: "#" },
-        { title: "Contact Us", href: "#" },
+        { title: "Blogs & Insights", href: "/resource/blogs" },
+        { title: "Case Studies", href: "/resource/case-studies" },
+        { title: "PR and Media Coverage", href: "/resource/media" },
       ]
     },
   ];
@@ -58,7 +82,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-4">
             {navItems.map((item, index) => (
               <NavigationItem 
                 key={index}
@@ -73,10 +97,10 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Link
-              to="#"
-              className="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              to="/contact"
+              className="inline-flex items-center justify-center rounded-full bg-blue-500 px-6 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
             >
-              Get in Touch
+              Contact Us
             </Link>
           </div>
 
