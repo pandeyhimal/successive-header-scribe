@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import MobileMenu from './MobileMenu';
@@ -14,11 +13,31 @@ const Header = () => {
       href: "/about",
       hasDropdown: true,
       dropdownItems: [
-        { title: "Our Story", href: "/about/story" },
-        { title: "Culture", href: "/about/culture" },
-        { title: "Careers", href: "/about/careers" },
-        { title: "How We Work", href: "/about/how-we-work" },
-        { title: "Awards & Recognitions", href: "/about/awards" },
+        { 
+          title: "Our Story", 
+          href: "/about/story",
+          description: "Learn about our journey, values, and vision."
+        },
+        { 
+          title: "Culture", 
+          href: "/about/culture",
+          description: "Discover our workplace culture and what makes us unique."
+        },
+        { 
+          title: "Careers", 
+          href: "/about/careers",
+          description: "Explore career opportunities and join our team."
+        },
+        { 
+          title: "How We Work", 
+          href: "/about/how-we-work",
+          description: "Understand our processes and approach to delivering value."
+        },
+        { 
+          title: "Awards & Recognitions", 
+          href: "/about/awards",
+          description: "See the awards and recognitions we've received."
+        },
       ]
     },
     {
